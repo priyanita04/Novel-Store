@@ -16,10 +16,11 @@ const Login = () => {
       }
     }
 
-    const {data} = await axios.post("http://localhost:9002/login", {email, password}, config);
+
+    const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
 
     console.log(data);
-
+    localStorage.setItem('userInfo', JSON.stringify(data))
   }
     return (
         <>

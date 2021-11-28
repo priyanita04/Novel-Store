@@ -22,9 +22,9 @@ function register() {
                     "Content-type": "application/json"
                 }
             }
-            const {data} = await axios.post("http://localhost:9002/register", {name, email, password}, config)
-
+            const {data} = await axios.post("http://localhost:9002/api/users", {name, email, password}, config)
             console.log(data)
+            // localStorage.setItem('userInfo', JSON.stringify(data))
         }
         else
         {
