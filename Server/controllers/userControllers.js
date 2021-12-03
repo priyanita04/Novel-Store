@@ -22,6 +22,13 @@ const registerUser = async(req, res)=>{
                 }
                 else
                 {
+                    res.status(201).json({
+                        _id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        password: user.password,
+                        token: generateToken()
+                    })
                     console.log("register data save")
                 }
             })
@@ -38,6 +45,12 @@ const loginUser = asyncHandler(async(req, res)=>{
 
         if (user && await user.matchPassword(password)) {
             //render to home page
+            res.status(201).json({
+                _id: user._id,
+                email: user.email,
+                password: user.password,
+                token: generateToken()
+            })
             console.log("Login Page")
 
         }
