@@ -93,3 +93,9 @@ div textarea{
   display: flex;
   flex-direction: column;
 }
+
+.image_div{
+  background-image: url("../images/library.jpg");
+  height: 100vh;
+  text-align: center;
+}

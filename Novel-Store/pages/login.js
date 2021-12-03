@@ -1,26 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import Link from 'next/link'
-import Header from '../comp/Header/Header'
+import Header from '../comp/Header'
 import axios from 'axios';
+import { useRouter } from 'next/router'
 
 const Login = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  useEffect(() => {
+   const userInfo = localStorage.getItem("userInfo");
+
+   if(userInfo)
+   {
+    router.push("/home")
+   }
+  }, [])
+
   const submitHandler = async(e)=>{
-    e.preventDefault();
-    const config = {
-      headers:{
-        "Content-type" : "application/json"
+
+    try {
+      const config = {
+        headers:{
+          "Content-type" : "application/json"
+        }
       }
+
+      localStorage.setItem('userInfo', JSON.stringify({email, password}))
+      const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
+
+      console.log(data);
+      // router.push("/home")
+
+    } catch (error) {
+      console.log(error)
     }
 
 
-    const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
-
-    console.log(data);
-    localStorage.setItem('userInfo', JSON.stringify(data))
   }
     return (
         <>

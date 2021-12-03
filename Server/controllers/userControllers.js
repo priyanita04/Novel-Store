@@ -1,10 +1,9 @@
 import User from '../Models/userModel.js'
+import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 
 const registerUser = async(req, res)=>{
     const { name, email, password} = req.body;
-
-
 
     User.findOne({ email: email }, (err, user) => {
         if (user) {
@@ -33,17 +32,18 @@ const registerUser = async(req, res)=>{
 
 
 
-const loginUser = async(req, res)=>{
+const loginUser = asyncHandler(async(req, res)=>{
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
         if (user && await user.matchPassword(password)) {
             //render to home page
             console.log("Login Page")
+
         }
         else {
             console.log("email does not exists or password does not match")
         }
-}
+})
 
 export {registerUser, loginUser}

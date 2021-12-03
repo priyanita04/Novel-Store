@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 import connectDB from './config/db.js'
 import Book from './Models/bookModel.js'
 import userRoutes from './routes/userRoutes.js'
+import BooksRoutes from './routes/booksRoutes.js'
 
 const app = express();
 dotenv.config();
@@ -21,29 +22,8 @@ app.get("/", (req, res) => {
 })
 
 app.use('/api/users', userRoutes)
+app.use('/home', BooksRoutes)
 
-
-app.post("/home", (req, res)=>{
-    const {bookName, price, detail, address, city, state, zip} = req.body;
-    const book = new Book({
-        bookName,
-        price,
-        detail,
-        address,
-        city,
-        state,
-        zip
-    })
-    book.save(error=>{
-        if(error)
-        {
-            console.log(error)
-        }
-        else{
-            console.log("book detail saved!")
-        }
-    })
-})
 
 
 const PORT = process.env.PORT || 9002

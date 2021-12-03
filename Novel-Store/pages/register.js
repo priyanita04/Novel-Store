@@ -1,20 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import Header from '../comp/Header/Header'
+import Header from '../comp/Header'
 import ErrorMessage from '../comp/ErrorMessage';
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 function register() {
+    const router = useRouter();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState(null);
 
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem("userInfo")
+        if(userInfo)
+        {
+            router.push("/login")
+        }
+    }, [])
+
     const submitHandler = async(e) =>{
-        e.preventDefault();
-        if(password===confirmPassword)
+        // e.preventDefault();
+        if(email && name && password===confirmPassword)
         {
             //login
             const config = {
@@ -22,15 +33,17 @@ function register() {
                     "Content-type": "application/json"
                 }
             }
+            localStorage.setItem('userInfo', JSON.stringify({name, email, password}))
             const {data} = await axios.post("http://localhost:9002/api/users", {name, email, password}, config)
             console.log(data)
-            // localStorage.setItem('userInfo', JSON.stringify(data))
         }
         else
         {
             setMessage("Password does not match")
             console.log('cannot login')
         }
+
+
 
     }
     return (

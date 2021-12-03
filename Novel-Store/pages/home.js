@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
+import Header from '../comp/Header'
 import { useRouter } from 'next/router'
 import { Form, Button, Row, Col, FloatingLabel } from 'react-bootstrap'
 
@@ -49,7 +50,7 @@ const Home = () => {
         <title>Novel Store | Home</title>
       </Head>
 
-
+      <Header/>
       <Form className="loginContainer" onSubmit={submitHandler}>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="name">
