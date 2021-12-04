@@ -30,12 +30,14 @@ const Home = () => {
     e.preventDefault();
     if(!bookName || !price || !detail || !address || !city || !state || !zip) return;
     //create new book detail to db
+    const userInfo = localStorage.getItem("userInfo");
     const config = {
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
       }
     }
-    const {data} = await axios.post("http://localhost:9002/home",
+    const {data} = await axios.post("http://localhost:9002/home/create",
       {bookName, price, detail, address, city, state, zip},
       config
     )

@@ -2,6 +2,11 @@ import mongoose from 'mongoose'
 
 const bookSchema = mongoose.Schema(
     {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            require: true,
+            ref: "User",
+        },
         bookName:{
             type: String,
             require: true
@@ -30,11 +35,7 @@ const bookSchema = mongoose.Schema(
             type: String,
             require: true
         },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            require: true,
-            ref: "User",
-        },
+
     }
 )
 

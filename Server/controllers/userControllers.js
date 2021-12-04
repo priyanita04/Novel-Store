@@ -27,7 +27,7 @@ const registerUser = async(req, res)=>{
                         name: user.name,
                         email: user.email,
                         password: user.password,
-                        token: generateToken()
+                        token: generateToken(user._id)
                     })
                     console.log("register data save")
                 }
@@ -49,7 +49,7 @@ const loginUser = asyncHandler(async(req, res)=>{
                 _id: user._id,
                 email: user.email,
                 password: user.password,
-                token: generateToken()
+                token: generateToken(user._id)
             })
             console.log("Login Page")
 
