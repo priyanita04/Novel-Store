@@ -21,7 +21,7 @@ const Login = () => {
   }, [])
 
   const submitHandler = async(e)=>{
-
+    e.preventDefault();
     try {
       const config = {
         headers:{
@@ -29,10 +29,11 @@ const Login = () => {
         }
       }
 
-      localStorage.setItem('userInfo', JSON.stringify({email, password}))
-      const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
 
-      console.log(data);
+      const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
+      const token = data.token;
+      // console.log(token);
+      localStorage.setItem('userInfo', JSON.stringify({email, password, token}))
       // router.push("/home")
 
     } catch (error) {
