@@ -24,7 +24,7 @@ function register() {
     }, [])
 
     const submitHandler = async(e) =>{
-        // e.preventDefault();
+        e.preventDefault();
         if(email && name && password===confirmPassword)
         {
             //login

@@ -12,7 +12,8 @@ const createBook = asyncHandler(async(req, res)=>{
             address,
             city,
             state,
-            zip
+            zip,
+            isActive: true
         })
         const createbook = await book.save();
         res.status(201).json(createbook);
@@ -20,7 +21,20 @@ const createBook = asyncHandler(async(req, res)=>{
 });
 
 const getBooks = asyncHandler(async(req, res)=>{
-    // res.status(201).json();
+
+    Book.find({isActive: true}, (err, book)=>{
+        res.status(201).json({
+            book
+        });
+    })
+
+
 });
 
-export {createBook, getBooks}
+const homeBooks = asyncHandler(async(req, res)=>{
+    const {token} = req.body
+    console.log("token is" ,token)
+    res.status(201).json({"godc": "cbnv"})
+})
+
+export {createBook, getBooks, homeBooks}

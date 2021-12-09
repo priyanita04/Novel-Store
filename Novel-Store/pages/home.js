@@ -1,9 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../comp/Header'
 import {Button} from 'react-bootstrap'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+
 
 function home() {
+  const router = useRouter();
+
+  const getHome = ()=>{
+    const userIn = localStorage.getItem("userInfo");
+    const userInfo = JSON.parse(userIn);
+    const token = userInfo.token
+
+    const config = {
+      headers:{
+        "Content-type" : "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      }
+    }
+
+    axios.post("http://localhost:9002/home", {token}, config)
+    .then((response)=>{
+      console.log(response.data)
+      console.log("fetched data from backend")
+    })
+    .catch(()=>{
+      console.log("error occure")
+    })
+  }
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+    if(!userInfo)
+    {
+      router.push('/login')
+    }
+    else{
+      getHome();
+    }
+  })
+
   return (
     <div>
       <Header/>

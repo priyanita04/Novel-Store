@@ -34,7 +34,6 @@ const Home = () => {
 
     const userIn = localStorage.getItem('userInfo');
     const userInfo = JSON.parse(userIn);
-    console.log(userInfo.token)
     const config = {
       headers: {
         "Content-type": "application/json",

@@ -35,7 +35,10 @@ const bookSchema = mongoose.Schema(
             type: String,
             require: true
         },
-
+        isActive:{
+            type: Boolean,
+            require: true
+        }
     }
 )
 

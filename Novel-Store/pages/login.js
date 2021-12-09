@@ -34,7 +34,7 @@ const Login = () => {
       const token = data.token;
       // console.log(token);
       localStorage.setItem('userInfo', JSON.stringify({email, password, token}))
-      // router.push("/home")
+      router.push("/home")
 
     } catch (error) {
       console.log(error)
