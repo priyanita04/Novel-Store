@@ -32,9 +32,14 @@ const getBooks = asyncHandler(async(req, res)=>{
 });
 
 const homeBooks = asyncHandler(async(req, res)=>{
-    const {token} = req.body
-    console.log("token is" ,token)
-    res.status(201).json({"godc": "cbnv"})
+    const {id, token} = req.body
+    // console.log("token is" ,id)
+    Book.find({user: id}, (err, book)=>{
+        res.status(201).json({
+            book
+        })
+    })
+
 })
 
 export {createBook, getBooks, homeBooks}

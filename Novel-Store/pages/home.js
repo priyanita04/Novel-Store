@@ -13,6 +13,7 @@ function home() {
     const userIn = localStorage.getItem("userInfo");
     const userInfo = JSON.parse(userIn);
     const token = userInfo.token
+    const id = userInfo.id
 
     const config = {
       headers:{
@@ -21,7 +22,7 @@ function home() {
       }
     }
 
-    axios.post("http://localhost:9002/home", {token}, config)
+    axios.post("http://localhost:9002/home", {id, token}, config)   //userId
     .then((response)=>{
       console.log(response.data)
       console.log("fetched data from backend")

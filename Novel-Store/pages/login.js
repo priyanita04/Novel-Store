@@ -31,9 +31,11 @@ const Login = () => {
 
 
       const {data} = await axios.post("http://localhost:9002/api/users/login", {email, password}, config);
+      const username = data.name;
       const token = data.token;
-      // console.log(token);
-      localStorage.setItem('userInfo', JSON.stringify({email, password, token}))
+      const id = data._id
+      console.log("data is ", data);
+      localStorage.setItem('userInfo', JSON.stringify({username, id, token}))
       router.push("/home")
 
     } catch (error) {

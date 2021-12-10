@@ -33,9 +33,14 @@ function register() {
                     "Content-type": "application/json"
                 }
             }
-            localStorage.setItem('userInfo', JSON.stringify({name, email, password}))
+
             const {data} = await axios.post("http://localhost:9002/api/users", {name, email, password}, config)
-            console.log(data)
+            const username = data.name;
+            const token = data.token;
+            const id = data._id;
+            localStorage.setItem('userInfo', JSON.stringify({username, id, token}))
+            // console.log("data would be", data)
+            router.push("/home")
         }
         else
         {
