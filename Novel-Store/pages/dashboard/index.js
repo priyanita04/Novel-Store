@@ -20,21 +20,22 @@ const Dashboard = () => {
             await axios.get("http://localhost:9002/home/dashboard")
             .then((response)=>{
                 const listofitems = response.data.book;
+                // console.log(listofitems)
                 setList(
                     listofitems.map((curr)=>{
-                        console.log(curr)
+                        // console.log(curr)
                         return curr
                     })
                 )
 
 
-                console.log("fetched data from backend")
+                // console.log("fetched data from backend")
 
             })
             .catch(()=>{
                 console.log("error occure")
             })
-            // console.log(list);
+            // console.log("list is", list);
 
         } catch (error) {
             console.log(error)
@@ -51,8 +52,11 @@ const Dashboard = () => {
         {
           router.push('/login')
         }
-
-      })
+        else
+        {
+            showBookList();
+        }
+      }, [])
 
     return (
         <>

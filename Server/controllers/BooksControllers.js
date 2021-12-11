@@ -33,7 +33,7 @@ const getBooks = asyncHandler(async(req, res)=>{
 
 const homeBooks = asyncHandler(async(req, res)=>{
     const {id, token} = req.body
-    // console.log("token is" ,id)
+    console.log("id is" ,id)
     Book.find({user: id}, (err, book)=>{
         res.status(201).json({
             book
